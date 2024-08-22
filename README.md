@@ -62,5 +62,11 @@ This will apply both models to your video data, allowing for enhanced sentiment 
 
 This project represents a significant step forward in multi-modal sentiment analysis, combining textual sentiment with facial emotion recognition to better understand nuanced speaker stances. As the system continues to evolve, including micro-expression analysis, we anticipate further improvements in understanding and interpreting complex communication.
 
+### References
+
+1. https://github.com/serengil/deepface
+2. https://github.com/ElenaRyumina/EMO-AffectNetModel
+3. https://github.com/tweetpie/masked-absa
+
 
 
