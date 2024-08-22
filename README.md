@@ -22,11 +22,45 @@ This project integrates **Facial Emotion Recognition** with **textual sentiment 
 
 - **Micro-Expression Analysis**: Currently, the project is exploring the use of micro-expressions—brief, involuntary facial movements that reveal underlying emotions. These subtle cues often go undetected by conventional emotion recognition systems but are essential for understanding speaker sentiment, particularly in complex or sarcastic communication.
 
-## Conclusion
+## Instructions to Run
 
-This project marks a significant advancement in multi-modal sentiment analysis. By combining textual sentiment with facial emotion recognition, the system is better equipped to understand nuanced speaker stances. Future developments in micro-expression analysis are expected to further improve the accuracy and depth of sentiment interpretation.
+Run this on a system with CUDA GPU or any other GPU device.
 
-## Contributing
+### 1. Clone the Repository
 
-Feel free to check out the project, suggest improvements, or contribute! Together, we can push the boundaries of multi-modal sentiment and stance analysis.
+To start, clone the `EMO-AffectNetModel` repository from GitHub.
+
+```bash
+git clone https://github.com/ElenaRyumina/EMO-AffectNetModel/
+```
+### 2. Navigate to the Project Directory
+
+Change into the cloned repository's directory.
+
+```bash
+cd EMO-AffectNetModel
+```
+
+### 3. Download the Models
+
+The necessary models for this project can be downloaded from [the EMO-AffectNetModel GitHub Repository](https://github.com/ElenaRyumina/EMO-AffectNetModel/).
+
+### 4. Run the Emotion Detection Model
+
+To run the EMO-AffectNet model on your videos, use the following command. Replace the paths with your actual video path, save path, and model paths.
+
+### 5. Execute the DeepFace + EMO-AffectNet Script
+
+You can also run the integrated DeepFace and EMO-AffectNet model with the following command:
+
+```bash
+python DeepFace_+_EMO_AfffectNet.py
+```
+This will apply both models to your video data, allowing for enhanced sentiment and stance analysis by integrating facial emotion recognition with textual sentiment analysis.
+
+### Conclusion
+
+This project represents a significant step forward in multi-modal sentiment analysis, combining textual sentiment with facial emotion recognition to better understand nuanced speaker stances. As the system continues to evolve, including micro-expression analysis, we anticipate further improvements in understanding and interpreting complex communication.
+
+
 
