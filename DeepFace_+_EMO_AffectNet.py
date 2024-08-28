@@ -211,13 +211,13 @@ def process_video(video_path, output_path, emotions_file_path):
         print(f"Saved face ID {face_id} to {img_path}")
 
 # Path to your video file
-video_path = '/content/angelina2.mp4'
+video_path = '/path/to/video'
 
 # Path to the output video file
-output_path = '/content/output.mp4'
+output_path = '/path/to/output'
 
 # Path to the emotions file
-emotions_file_path = '/content/frame_emotions.txt'
+emotions_file_path = '/path/to/csv_file'
 
 # Process the video
 process_video(video_path, output_path, emotions_file_path)
