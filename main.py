@@ -1,4 +1,4 @@
-from face_tracking_factory import FaceTrackingFactory
+from face_tracking import FaceTracking
 
 # Path to your video file
 video_path = '/path/to/video'
