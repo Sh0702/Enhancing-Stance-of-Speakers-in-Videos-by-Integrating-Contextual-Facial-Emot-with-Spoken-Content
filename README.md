@@ -54,7 +54,7 @@ To run the EMO-AffectNet model on your videos, use the following command. Replac
 You can also run the integrated DeepFace and EMO-AffectNet model with the following command:
 
 ```bash
-python DeepFace_+_EMO_AfffectNet.py
+python main.py
 ```
 This will apply both models to your video data, allowing for enhanced sentiment and stance analysis by integrating facial emotion recognition with textual sentiment analysis.
 
