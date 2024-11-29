@@ -1,4 +1,4 @@
-# Facial-Emotion-Recognition-for-Speaker-Stance-and-Narrative-Analysis
+# Enhancing the Stance of Speakers in Videos by Integrating Contextual Facial Emotions with Spoken Content
 
 ## Problem Addressed
 
