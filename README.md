@@ -6,13 +6,19 @@ Traditional textual sentiment analysis models often struggle with weakly worded 
 
 ## Solution Overview
 
-This project integrates contextual **Facial Emotion Recognition** with **Textual Sentiment Analysis** to enhance understanding of speaker stances in videos. By combining textual data with facial emotion insights, the system captures a more holistic view of a speaker’s message, even when the text is unclear or sarcastic.
+This project integrates contextual **Facial Emotion Recognition** with **Textual Sentiment Analysis** with the goal to enhance understanding of speaker stances in videos. By combining textual data with facial emotion insights, the system captures a more holistic view of a speaker’s message, even when the text is unclear or sarcastic.
 
-## Technologies and Tools Used
+## Models Used
 
-- **EMO-AffectNet**: These tools were utilized for **Facial Emotion Recognition** to detect emotions such as happiness, anger, sadness, and surprise from video data. This emotion layer adds critical context to the speaker's sentiment. The emotions will be clubbed into Positive(Happiness), Negative(Sadness, Fear, Disgust, Anger) and Neutral(Neutral, Suprise). 
+- **EMO-AffectNet**: These tools were utilized for **Facial Emotion Recognition** to detect emotions such as happiness, anger, sadness, and surprise from video data. This emotion layer adds critical context to the speaker's sentiment. The emotions will be clubbed into Positive(Happiness), Negative(Sadness, Fear, Disgust, Anger) and Neutral(Neutral, Suprise).
+  a. A 2-part FER model that uses a static backbone model to detect extreme emotions and extract selected hand crafted features from the frames of the video and a dynamic temporal model that detects emotion using extracted features and contextual information from previous frames.
+  b. Has been trained on cross-corpus datasets and proven ability to generalize on new datasets with a Unweighted Average Revall of 66.2 %.
+  
   
 - **MaskedABSA (Aspect-Based Sentiment Analysis)**: This model was integrated to perform aspect-based sentiment analysis on the textual data. It identifies specific aspects within the text and assesses sentiment toward each, providing more granular sentiment detection, particularly in ambiguous sentences.
+  a. A text based sentiment analysis model that masks the context in sentences and detects sentiment for that mask, thereby focussing on the context alone to infer sentiment directed towards the masked aspect.
+  b. Has been trained across different domains and datasets with a maximum accuracy of 86.24% on unseen datasets.
+
 
 ## Data
 
