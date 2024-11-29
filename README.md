@@ -2,25 +2,37 @@
 
 ## Problem Addressed
 
-Traditional textual sentiment analysis models often struggle with weakly worded or sarcastic sentences, leading to inaccuracies in understanding speaker intent. This is particularly evident when analyzing complex stances on sensitive topics like pro-USA and anti-USA attitudes. Text alone can be ambiguous, necessitating a more comprehensive approach to sentiment and stance detection.
+Traditional textual sentiment analysis models often struggle with weakly worded or sarcastic sentences, leading to inaccuracies in understanding speaker intent. This is particularly evident when analyzing complex stances on sensitive topics like BLM and ALM. Text alone can be ambiguous, necessitating a more comprehensive approach to sentiment and stance detection.
 
 ## Solution Overview
 
-This project integrates **Facial Emotion Recognition** with **textual sentiment analysis** to enhance understanding of speaker stances in videos. By combining textual data with facial emotion insights, the system captures a more holistic view of a speaker’s message, even when the text is unclear or sarcastic.
+This project integrates contextual **Facial Emotion Recognition** with **Textual Sentiment Analysis** to enhance understanding of speaker stances in videos. By combining textual data with facial emotion insights, the system captures a more holistic view of a speaker’s message, even when the text is unclear or sarcastic.
 
 ## Technologies and Tools Used
 
-- **DeepFace** and **EMO-AffectNet**: These tools were utilized for **Facial Emotion Recognition** to detect emotions such as happiness, anger, sadness, and surprise from video data. This emotion layer adds critical context to the speaker's sentiment.
+- **EMO-AffectNet**: These tools were utilized for **Facial Emotion Recognition** to detect emotions such as happiness, anger, sadness, and surprise from video data. This emotion layer adds critical context to the speaker's sentiment. The emotions will be clubbed into Positive(Happiness), Negative(Sadness, Fear, Disgust, Anger) and Neutral(Neutral, Suprise). 
   
 - **MaskedABSA (Aspect-Based Sentiment Analysis)**: This model was integrated to perform aspect-based sentiment analysis on the textual data. It identifies specific aspects within the text and assesses sentiment toward each, providing more granular sentiment detection, particularly in ambiguous sentences.
 
-## Achievements and Results
+## Data
 
-- **30% Improvement in Accuracy**: The integration of facial emotion recognition and textual analysis boosted sentiment accuracy by over 30%, especially in detecting and understanding speaker stances on pro-USA and anti-USA topics. The system successfully captures emotional undertones in the text and correlates them with the speaker’s facial expressions for a more reliable sentiment assessment.
+- We have scrapped our own data from social media platforms such as TikTok, Instagram and YouTube.
+- We possess 20 videos(10 from each camp) from each platform each ranging from 45 - 90s. Each of these videos consists of a single speaker speaking either pro BLM or pro ALM. 
 
 ## Ongoing Exploration
 
-- **Micro-Expression Analysis**: Currently, the project is exploring the use of micro-expressions—brief, involuntary facial movements that reveal underlying emotions. These subtle cues often go undetected by conventional emotion recognition systems but are essential for understanding speaker sentiment, particularly in complex or sarcastic communication.
+- Currently, we are annotating our scrapped data with facial emotions and marking spoken content as Positive and Negative.
+- The facial emotions are annotated using a custom built API which allows the annotater to view the video frame by frame and annotate. The annotator views the video once and also is provided spoken content of the video in order to incorporate contextual annotation.
+- Similarly the spoken content is also annotated by the annotator after watching the video.
+
+## Upcoming work
+
+- Once the annotation is completed, we will be focussing on validating the performance of our model using the following metrics.
+    a. Accuracy = TP + TN / TP + TN + FP + FN
+    b. Unweighted Average Recall = (1/N) * ∑ (TP for that instance) / (Total instances)
+    c. F1-Score = (Precision * Recall) / (Precision + Recall)
+    d. Area Under Curve = ∫ TPR(x)dx where TPR(x) - True Positive Rate for instance x - TPR = TP / (TP + FN)
+  TP - True Positive TN - True Negative FP - False Positive FN - False Negative
 
 ## Instructions to Run
 
