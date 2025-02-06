@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Define paths
-reports_dir = "/content/drive/MyDrive/sentiment/csv/reports"
+reports_dir = "./reports"
 platforms = ["instagram", "tiktok", "youtube"]
 categories = ["alm", "blm"]
 
@@ -38,23 +38,44 @@ for platform in platforms:
 # Convert durations to a DataFrame
 duration_df = pd.DataFrame(duration_data)
 
-# Print summary statistics
-summary = duration_df.groupby(['platform', 'category'])['duration'].agg(['mean', 'max', 'min'])
-print("Summary by Platform and Category:")
-print(summary)
-
-# Overall statistics
+# Summary Statistics
+summary_by_category = duration_df.groupby(['platform', 'category'])['duration'].agg(['mean', 'max', 'min'])
+summary_by_platform = duration_df.groupby(['platform'])['duration'].agg(['mean', 'max', 'min'])
 overall_summary = duration_df['duration'].agg(['mean', 'max', 'min'])
+
+# Print summaries
+print("Summary by Platform and Category:")
+print(summary_by_category)
+print("\nSummary by Platform:")
+print(summary_by_platform)
 print("\nOverall Summary:")
 print(overall_summary)
 
-# Box-and-Whisker Plot
+# Box-and-Whisker Plot: Category and Platform
 plt.figure(figsize=(10, 6))
 duration_df.boxplot(column='duration', by=['platform', 'category'], grid=False)
-plt.title("Box-and-Whisker Plot of Video Durations")
+plt.title("Box-and-Whisker Plot of Video Durations (By Category and Platform)")
 plt.suptitle("")
 plt.xlabel("Platform and Category")
 plt.ylabel("Duration (seconds)")
 plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Box-and-Whisker Plot: Platform
+plt.figure(figsize=(8, 6))
+duration_df.boxplot(column='duration', by=['platform'], grid=False)
+plt.title("Box-and-Whisker Plot of Video Durations (By Platform)")
+plt.suptitle("")
+plt.xlabel("Platform")
+plt.ylabel("Duration (seconds)")
+plt.tight_layout()
+plt.show()
+
+# Box-and-Whisker Plot: Overall Dataset
+plt.figure(figsize=(6, 6))
+duration_df.boxplot(column='duration', grid=False)
+plt.title("Box-and-Whisker Plot of Video Durations (Overall Dataset)")
+plt.ylabel("Duration (seconds)")
 plt.tight_layout()
 plt.show()
