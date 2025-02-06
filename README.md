@@ -69,9 +69,8 @@ The model’s effectiveness is evaluated using the following metrics:
 ## Future Work
 
 - **Fine-Tuning**: Optimize hyperparameters for better performance on sarcastic and subtle speech.
-- **Scalability**: Extend the dataset to include multilingual and cross-cultural videos.
-- **Integration with Recommendation Systems**: Test how improved stance detection influences content recommendations on social media platforms.
-- **Micro-Expression Analysis**: Explore the role of rapid facial muscle movements in stance classification.
+- **Extract Embeddings and Train a Feedforward Neural Network**: By extracting embeddings from both models, we can extract features from both videos and spoken content and enhance the overall stance of the speaker.
+
 
 ## Conclusion
 
