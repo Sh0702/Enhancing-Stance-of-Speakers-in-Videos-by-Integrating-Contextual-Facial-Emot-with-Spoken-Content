@@ -1,84 +1,83 @@
-# Enhancing the Stance of Speakers in Videos by Integrating Contextual Facial Emotions with Spoken Content
+# Towards Robust Speaker Stance Classification in Social Media Videos  
+**A Multimodal Framework Integrating Facial Emotion Recognition with Aspect-Based Sentiment Analysis**
 
-## Problem Addressed
+## 🧠 Problem Statement  
+Traditional stance detection systems primarily rely on analyzing spoken content. However, they often fail to classify stances correctly in weakly labeled, sarcastic, or emotionally ambiguous content—common in real-world platforms like YouTube, TikTok, and Instagram. Existing sentiment analysis models excel on well-structured datasets but struggle to generalize in dynamic, context-rich settings such as social media.
 
-Traditional stance detection methods rely primarily on analyzing spoken content. However, these methods struggle with weakly worded, sarcastic, or ambiguous sentences, leading to incorrect stance classification. Sentiment analysis techniques perform well with structured datasets but fail in real-world, dynamic settings like social media. This project enhances stance detection by integrating **Facial Emotion Recognition (FER)** with **Spoken Content Analysis**, providing a more accurate interpretation of speaker intent.
+## 🎯 Research Objective  
+This research aims to build a robust, multimodal stance detection framework that integrates **Facial Emotion Recognition (FER)** with **Aspect-Based Sentiment Analysis (ABSA)**. The goal is to accurately classify speaker stance, especially when dealing with subtle or ambiguous expressions that challenge unimodal methods.
 
-## Research Objective
+## 📦 Dataset  
+A custom weakly-labeled dataset is being curated, consisting of video content focused on socio-political discourse.
 
-This research aims to enhance stance detection by incorporating facial emotions into spoken content analysis. By leveraging diverse video data from social media platforms, the project seeks to overcome limitations in existing datasets that predominantly focus on extreme emotions while neglecting subtle emotional cues. The ultimate goal is to build a more robust, multimodal stance detection system.
+### 🔍 Dataset Characteristics
+- **Size**: 600 videos (300 Black Lives Matter, 300 All Lives Matter)
+- **Sources**: TikTok, Instagram, YouTube  
+- **Average Duration**: ~47.39 seconds (range: 14.54 – 95.37 seconds)
+- **Content Types**: Reels, podcasts, stage discussions  
+- **Speaker**: Single-speaker focused to minimize external bias  
+- **Subtitles**: Generated using [Whisper AI](https://github.com/openai/whisper), manually verified  
+- **Emotion Annotation**: Performed frame-by-frame using a custom-built annotation tool with contextual speech view
 
-## Dataset
+## 🔧 Methodology  
 
-A **custom dataset** has been curated from three major social media platforms: **TikTok, Instagram, and YouTube**.
+### 🧩 Models Used  
+| Model | Description |
+|-------|-------------|
+| **MaskedABSA** | Text-only baseline using masked aspect-based sentiment analysis |
+| **VLM Embeddings + Classifier** | Text + Vision baseline using vision-language model embeddings |
+| **MaskedABSA + EMO-AffectNet** | Proposed multimodal approach integrating facial emotions with spoken content |
+| **MaskedABSA + EMO-AffectNet + GAT** | Proposed improvement using Graph Attention Networks to model temporal-emotional dependencies |
 
-### **Dataset Characteristics:**
+### 🧠 Emotion Recognition (EMO-AffectNet)
+- Combines static and dynamic modeling:
+  - **Static Backbone**: For frame-wise emotion detection
+  - **Temporal Model**: For tracking emotional shifts across video frames
+- Classifies each frame into **Positive**, **Negative**, or **Neutral**
 
-- **60 videos** (20 from each platform), equally split between **Black Lives Matter (BLM) and All Lives Matter (ALM)** stances.
-- **Diverse formats**, including reels, podcasts, and stage discussions.
-- **Average duration**: 47.39 seconds (ranging from 14.54 - 95.37 seconds).
-- **Single-speaker focus**: Only videos featuring a single speaker are included to eliminate external influences on stance detection.
-- **Annotation**:
-  - Subtitles were extracted using **Whisper AI** and manually verified.
-  - Facial emotions were annotated using a custom-built API that allows frame-by-frame annotation while incorporating contextual speech content.
-  - Spoken content was manually labeled for stance classification.
-- **Focus on both extreme and subtle emotions**, providing a realistic testbed for stance detection.
+### 🗣️ Textual Sentiment (MaskedABSA)
+- Uses masked attention around context-specific targets
+- Designed to handle ambiguous, sarcastic, or weakly expressed sentiments
 
-## Methodology
+### 🔗 Fusion Strategies
+- Emotion embeddings from EMO-AffectNet are integrated with sentiment scores from MaskedABSA
+- A multimodal classifier is trained to leverage these fused features
+- GAT layers are added to learn temporal and contextual dependencies across frames
 
-### **Multimodal Approach**
-The project integrates **Facial Emotion Recognition (FER)** and **Aspect-Based Sentiment Analysis (ABSA)** to improve stance detection accuracy:
+## 📊 Experimental Evaluation  
 
-1. **Facial Emotion Recognition (FER):**
-   - Uses **EMO-AffectNet**, a two-part model with:
-     - **Static backbone** for extreme emotion detection and feature extraction.
-     - **Dynamic temporal model** for contextual emotion shifts across video frames.
-   - Categorizes emotions into **Positive, Negative, and Neutral**.
+### 📈 Metrics
+- **Accuracy** = (TP + TN) / (TP + TN + FP + FN)  
+- **Unweighted Average Recall (UAR)**  
+- **F1-Score** = 2 × (Precision × Recall) / (Precision + Recall)  
+- **AUC** (Area Under Curve)
 
-2. **Textual Sentiment Analysis:**
-   - Uses **MaskedABSA**, a model trained to analyze sentiment polarity by masking context-specific terms.
-   - Capable of identifying **subtle sentiment nuances**, crucial for sarcasm and ambiguous speech.
+### 🧪 Preliminary Results  
+| Model                          | Accuracy | Precision | Recall | F1-Score |
+|-------------------------------|----------|-----------|--------|----------|
+| EMO-AffectNet (FER only)      | 0.36     | 0.67      | 0.36   | 0.41     |
+| MaskedABSA (Text only)        | 0.51     | 0.51      | 0.59   | 0.54     |
+| Combined (MaskedABSA + FER)   | 0.49     | 0.49      | 0.64   | 0.56     |
+| + Graph Attention Networks    | TBD      | TBD       | TBD    | TBD      |
 
-3. **Fusion of Modalities:**
-   - EMO-AffectNet provides **emotional context**, which enhances sentiment detection by MaskedABSA.
-   - The combined approach enables **more accurate and nuanced stance classification**.
+## 🔍 Key Findings  
+- **MaskedABSA** captures sentiment but lacks precision in real-world, noisy inputs  
+- **EMO-AffectNet** offers high emotional precision but suffers in temporal recall  
+- **Multimodal Integration** provides better balance and interpretability in stance detection  
+- **GAT Layers** (ongoing work) expected to enhance sequence-level understanding
 
-## Experimental Evaluation
+## 🚧 Future Work  
+- 📈 Fine-tune hyperparameters for sarcasm and ambiguity handling  
+- 🔍 Scale up dataset size and diversity  
+- 🧠 Train a feedforward neural network on fused embeddings  
+- 📊 Introduce GAT-enhanced context modeling for emotion-sentiment propagation
 
-### **Performance Metrics**
-The model’s effectiveness is evaluated using the following metrics:
+## ✅ Applications  
+- Social Media Content Categorization  
+- Targeted Advertising and Audience Profiling  
+- Misinformation and Bias Detection  
 
-- **Accuracy** = (TP + TN) / (TP + TN + FP + FN)
-- **Unweighted Average Recall (UAR)** = (1/N) * ∑ (TP for each class / Total instances per class)
-- **F1-Score** = (2 * Precision * Recall) / (Precision + Recall)
-- **Area Under Curve (AUC)** = ∫ TPR(x)dx, where **TPR = TP / (TP + FN)**
-
-### **Preliminary Results**
-
-| Model          | Accuracy | Precision | Recall | F1-Score |
-| -------------- | -------- | --------- | ------ | -------- |
-| EMO-AffectNet  | 0.36     | 0.67      | 0.36   | 0.41     |
-| MaskedABSA     | 0.51     | 0.51      | 0.59   | 0.54     |
-| Combined Model | 0.49     | 0.49      | 0.64   | 0.56     |
-
-### **Findings**
-- **MaskedABSA** captures a wide range of sentiments but struggles with precision.
-- **EMO-AffectNet** detects facial emotions with high precision but has lower recall.
-- **The Combined Model** improves F1-Score, balancing recall and precision, making it **more effective for stance detection in real-world scenarios**.
-
-## Future Work
-
-- **Fine-Tuning**: Optimize hyperparameters for better performance on sarcastic and subtle speech.
-- **Extract Embeddings and Train a Feedforward Neural Network**: By extracting embeddings from both models, we can extract features from both videos and spoken content and enhance the overall stance of the speaker.
-
-
-## Conclusion
-
-This research presents a **multimodal stance detection system** that integrates facial emotion recognition with spoken content analysis, addressing limitations in traditional sentiment-based methods. The system’s capability to detect **subtle emotional shifts** makes it a promising tool for applications such as **social media content categorization, targeted advertising, and misinformation detection**. Ongoing work focuses on refining annotation quality, improving model robustness, and scaling up dataset size to enhance real-world applicability.
-
-## References
-
-1. Ryumina, E., Dresvyanskiy, D., & Karpov, A. (2022). In search of a robust facial expressions recognition model: A large-scale visual cross-corpus study. *Neurocomputing, 514*, 435-450.
-2. Lee, Y., Çetinkaya, Y., Külah, E., Toroslu, İ., & Davulcu, H. Masking the Bias: From Echo Chambers to Large Scale Aspect-Based Sentiment Analysis.
-3. Lee, J., Kim, S., Kim, S., Park, J., & Sohn, K. (2019). Context-aware emotion recognition networks. *Proceedings of the IEEE/CVF International Conference on Computer Vision*, 10143-10152.
-4. Tomar, P.S., Mathur, K., & Suman, U. (2024). Fusing facial and speech cues for enhanced multimodal emotion recognition. *International Journal of Information Technology, 16*(3), 1397-1405.
+## 👨‍🔬 Thesis Advisor  
+Dr. Hasan Davulcu  
+Professor, School of Computing and Augmented Intelligence  
+Arizona State University  
